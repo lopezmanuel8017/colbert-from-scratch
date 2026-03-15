@@ -1,0 +1,51 @@
+{
+  "documents": [
+    {"id": 0, "text": "The python programming language was created by Guido van Rossum in 1991. It was designed to be easy to read and simple to implement."},
+    {"id": 1, "text": "The python snake is a large non-venomous reptile found in tropical regions. Pythons kill their prey by constriction rather than venom."},
+    {"id": 2, "text": "Guido van Rossum, the creator of Python, worked at Google and later at Dropbox on cloud infrastructure."},
+    {"id": 3, "text": "Machine learning models require large datasets for training. Without sufficient data, models tend to overfit and generalize poorly."},
+    {"id": 4, "text": "Tropical reptiles such as iguanas and geckos need specific humidity and temperature control to survive in captivity."},
+    {"id": 5, "text": "Java and Python are the most popular programming languages in 2024, according to the TIOBE index and Stack Overflow surveys."},
+    {"id": 6, "text": "The anaconda is another large snake species native to South America. Unlike pythons, anacondas are semi-aquatic."},
+    {"id": 7, "text": "Python emphasizes code readability and uses significant whitespace. Its design philosophy is summarized in the Zen of Python."},
+    {"id": 8, "text": "Convolutional neural networks excel at image classification tasks. They learn spatial hierarchies of features through backpropagation."},
+    {"id": 9, "text": "The reticulated python is the longest snake species in the world, with some individuals exceeding six meters in length."}
+  ],
+  "queries": [
+    {
+      "id": "q0",
+      "text": "Who created the Python programming language?",
+      "relevant": [0],
+      "hard_negative": [1, 5, 7],
+      "note": "Requires matching 'python' + 'programming' + 'created'. Bi-encoder may confuse with snake docs or other Python-mention docs."
+    },
+    {
+      "id": "q1",
+      "text": "What is the longest snake species?",
+      "relevant": [9],
+      "hard_negative": [1, 6],
+      "note": "Requires matching 'longest' + 'snake'. Multiple snake docs compete."
+    },
+    {
+      "id": "q2",
+      "text": "Where did the creator of Python work?",
+      "relevant": [2],
+      "hard_negative": [0, 7],
+      "note": "Doc 2 contains 'creator of Python' explicitly. Tests whether token matching catches 'creator' + 'work' together."
+    },
+    {
+      "id": "q3",
+      "text": "What do machine learning models need?",
+      "relevant": [3],
+      "hard_negative": [8],
+      "note": "Straightforward. Bi-encoder should handle this fine. Control case."
+    },
+    {
+      "id": "q4",
+      "text": "Which programming languages are most popular?",
+      "relevant": [5],
+      "hard_negative": [0, 7],
+      "note": "Tests ranking when multiple docs mention programming."
+    }
+  ]
+}
