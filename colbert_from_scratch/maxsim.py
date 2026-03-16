@@ -7,8 +7,12 @@ import torch
 def maxsim_np(Q: np.ndarray, D: np.ndarray, normalize: bool = True) -> float:
     """Compute the MaxSim relevance score between query and document embeddings."""
     if normalize:
-        Q = Q / np.linalg.norm(Q, axis=1, keepdims=True)
-        D = D / np.linalg.norm(D, axis=1, keepdims=True)
+        Q_norms = np.linalg.norm(Q, axis=1, keepdims=True)
+        D_norms = np.linalg.norm(D, axis=1, keepdims=True)
+        Q_norms[Q_norms == 0] = 1.0
+        D_norms[D_norms == 0] = 1.0
+        Q = Q / Q_norms
+        D = D / D_norms
     sim = Q @ D.T
     return float(sim.max(axis=1).sum())
 
